@@ -4,7 +4,7 @@
 *    Перевод арабских чисел в римские и обратно    *
 ***************************************************/
 #include <string>
-#include <stdio.h>
+#include <iostream>
 
 using namespace std;
 
@@ -21,19 +21,19 @@ int main() {
         "DC", "DCC", "DCCC", "CM"};
     
     
-    scanf("%i", &arabicNumber);
+	cin >> arabicNumber;
+	int iteratedNumber = arabicNumber;
     
-    string result[arabicNumber.length()];
+    string result = " ";
     
-    int iteratedNumber = &arabicNumber;
     int iteration = 1;
     while (iteratedNumber > 0) {
         currentNumeral = iteratedNumber % 10;
         iteratedNumber /= 10;
         if (iteration == 1) {
-            result[iteration] = romanOneToTenNumbers[iteration];
+            result = romanOneToTenNumbers[currentNumeral] + result;
         }
         iteration++;
     }
-    printf("%s", &result);
+	cout << result;
 }
