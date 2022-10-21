@@ -47,13 +47,12 @@ int arabicEquivalentToRomanNumeral(string number) {
 
 int main() {
     bool choice;
-    setlocale(LC_ALL, "ru");
-
     
     cout << "Choose the transition task: Arabic to Roman - push 1, Roman to Arabic - push 0:  ";
     cin >> choice;
     
-    if(choice){
+    
+    if(choice) {
     	int arabicNumber;
     	cout << "Enter an Arabic number: ";
 		cin >> arabicNumber;
@@ -82,7 +81,6 @@ int main() {
 	        iteration++;
 	    }
 		cout << arabicToRomanResult;
-		return 0;
 		
 		
 	} else {
