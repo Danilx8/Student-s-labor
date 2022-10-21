@@ -102,7 +102,7 @@ int main() {
 		while(iteration < romanNumber.size()) {
 			previousNumber = currentNumber;
 			currentNumber = romanNumber[iteration];			
-			if(arabicEquivalentToRomanNumeral(currentNumber) > arabicEquivalentToRomanNumeral(previousNumber)) {
+			if(arabicEquivalentToRomanNumeral(currentNumber) >= arabicEquivalentToRomanNumeral(previousNumber)) {
 				romanToArabicResult += arabicEquivalentToRomanNumeral(currentNumber);
 			} else {
 				romanToArabicResult -= arabicEquivalentToRomanNumeral(currentNumber);
