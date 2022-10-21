@@ -6,6 +6,7 @@
 #include <string>
 #include <iostream>
 #include <algorithm>
+#include <cctype>
 
 using namespace std;
 
@@ -89,6 +90,7 @@ int main() {
 		
 		cout << "Enter a Roman number: ";
 		cin >> romanNumber;
+		transform(romanNumber.begin(), romanNumber.end(), romanNumber.begin(), ::toupper);
 		
 		int iteration = 0;
 		string currentNumber;
@@ -102,12 +104,13 @@ int main() {
 		while(iteration < romanNumber.size()) {
 			previousNumber = currentNumber;
 			currentNumber = romanNumber[iteration];			
-			if(arabicEquivalentToRomanNumeral(currentNumber) >= arabicEquivalentToRomanNumeral(previousNumber)) {
-				romanToArabicResult += arabicEquivalentToRomanNumeral(currentNumber);
+			if(arabicEquivalentToRomanNumeral(currentNumber) > arabicEquivalentToRomanNumeral(previousNumber)) {
+				romanToArabicResult = romanToArabicResult + arabicEquivalentToRomanNumeral(currentNumber) - arabicEquivalentToRomanNumeral(previousNumber) * 2;
 			} else {
-				romanToArabicResult -= arabicEquivalentToRomanNumeral(currentNumber);
+				romanToArabicResult += arabicEquivalentToRomanNumeral(currentNumber);
 			}
 			++iteration;
+			cout << previousNumber << endl << currentNumber << endl;
 		}
 		cout << romanToArabicResult;
 	}
