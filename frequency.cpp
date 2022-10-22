@@ -11,32 +11,69 @@
 using namespace std;
 
 int main() {
-  int letterFrequency[128];
-  ifstream currentFile;
+  int singleLetterFrequency[128];
+  fstream singlesFile;
   char character;
 
-  currentFile.open("Hello World.txt");
-  if (!currentFile) {
+  singlesFile.open("Cleopatra.txt");
+  if (!singlesFile) {
     cout << "File not found.";
     return 1;
     }
 
   for (int iterator = 0; iterator < 128; ++iterator) {
-    letterFrequency[iterator] = 0;
+    singleLetterFrequency[iterator] = 0;
     }
 
-  character = currentFile.get();
+  character = singlesFile.get();
   while (character != EOF) {
     character = toupper(character);
-    ++letterFrequency[character];
-    character = currentFile.get();
+    ++singleLetterFrequency[character];
+    character = singlesFile.get();
     }
 
-  cout << endl << "Letter frequencies in this file are:" << endl;
+  cout << endl << "Single letters frequencies in this file are:" << endl;
   for (char character = 'A'; character <= 'Z'; ++character) {
-    if (letterFrequency[character]) {
-      cout << character << " : " << letterFrequency[character] << endl;
+    if (singleLetterFrequency[character]) {
+      cout << character << " : " << singleLetterFrequency[character] << endl;
       }
     }
+
+  /////////////////////
+
+
+  int doubleLetterFrequency[128][128];
+  fstream doublesFile;
+
+  doublesFile.open("Cleopatra.txt");
+
+  for (int firstIterator = 0; firstIterator < 128; ++firstIterator) {
+    for (int secondIterator = 0; secondIterator < 128; ++secondIterator) {
+      doubleLetterFrequency[firstIterator][secondIterator] = 0;
+      }
+    }
+
+  char firstCharacter, secondCharacter;
+  firstCharacter = doublesFile.get();
+  secondCharacter = doublesFile.get();
+
+  while (secondCharacter != EOF) {
+    firstCharacter = toupper(firstCharacter);
+    secondCharacter = toupper(secondCharacter);
+    ++doubleLetterFrequency[firstCharacter][secondCharacter];
+    firstCharacter = secondCharacter;
+    secondCharacter = doublesFile.get();
+    }
+
+  cout << endl << "Double letter frequencies in this file are:" << endl;
+  for (char firstCharacter = 'A'; firstCharacter <= 'Z'; ++firstCharacter) {
+    for (char secondCharacter = 'A'; secondCharacter <= 'Z'; ++secondCharacter) {
+
+      if (doubleLetterFrequency[firstCharacter][secondCharacter]) {
+        cout << firstCharacter << secondCharacter << " : " << doubleLetterFrequency[firstCharacter][secondCharacter] << endl;
+        }
+      }
+    }
+
   return 0;
   }
