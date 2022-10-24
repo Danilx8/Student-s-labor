@@ -10,8 +10,8 @@
 #include <string>
 
 std::string weekdays[7] = {
-	"Monday", "Tuesday", "Wednesday", "Thursday",
-	"Friday", "Saturday", "Sunday"
+	"MON", "TUE", "WED", "THU",
+	"FRI", "SAT", "SUN"
 	};
 
 bool isLeapYear(int year) {
@@ -27,23 +27,29 @@ bool isLeapYear(int year) {
 	return false;
 }
 
-std::string firstDayOfYear(int year) {
+int firstDayOfYear(int year) {
 	year = (year - 1) % 400;
 
     int century = year / 100;
 
-    int index   = ((4 * century) + (year % 100)) % 28;
+    int index = ((4 * century) + (year % 100)) % 28;
 
     int weekday = (index + (index / 4));
 
-    return weekdays[(weekday % 7)];
+    return (weekday % 7);
 }
 
 int main() {
 	int year;
 	std::cin >> year;
 	
-	std::cout << firstDayOfYear(year);
+	
+	for (int months = 0; months < 12; ++months) {
+		std::cout << "\n\n\n";
+		for (int weekdaysIndex = 0; weekdaysIndex < 7; ++weekdaysIndex) {
+			std:: cout << weekdays[weekdaysIndex] << "   ";
+		}
+	}
 	
 	return 0;
 }
