@@ -19,25 +19,25 @@ int main() {
   if (!singlesFile) {
     cout << "File not found.";
     return 1;
-    }
+  }
 
   for (int iterator = 0; iterator < 128; ++iterator) {
     singleLetterFrequency[iterator] = 0;
-    }
+  }
 
   character = singlesFile.get();
   while (character != EOF) {
     character = toupper(character);
     ++singleLetterFrequency[character];
     character = singlesFile.get();
-    }
+  }
 
   cout << endl << "Single letters frequencies in this file are:" << endl;
   for (char character = 'A'; character <= 'Z'; ++character) {
     if (singleLetterFrequency[character]) {
       cout << character << " : " << singleLetterFrequency[character] << endl;
-      }
     }
+  }
 
   /////////////////////
 
@@ -50,8 +50,8 @@ int main() {
   for (int firstIterator = 0; firstIterator < 128; ++firstIterator) {
     for (int secondIterator = 0; secondIterator < 128; ++secondIterator) {
       doubleLetterFrequency[firstIterator][secondIterator] = 0;
-      }
     }
+  }
 
   char firstCharacter, secondCharacter;
   firstCharacter = doublesFile.get();
@@ -63,7 +63,7 @@ int main() {
     ++doubleLetterFrequency[firstCharacter][secondCharacter];
     firstCharacter = secondCharacter;
     secondCharacter = doublesFile.get();
-    }
+  }
 
   cout << endl << "Double letter frequencies in this file are:" << endl;
   for (char firstCharacter = 'A'; firstCharacter <= 'Z'; ++firstCharacter) {
@@ -71,9 +71,9 @@ int main() {
 
       if (doubleLetterFrequency[firstCharacter][secondCharacter]) {
         cout << firstCharacter << secondCharacter << " : " << doubleLetterFrequency[firstCharacter][secondCharacter] << endl;
-        }
       }
     }
+  }
 
   return 0;
-  }
+}
