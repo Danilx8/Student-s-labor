@@ -13,15 +13,15 @@ using namespace std;
 string romanOneToTenNumbers[10] = {
   "", "I", "II", "III", "IV", "V",
   "VI", "VII", "VIII", "IX"
-  },
+},
 romanTenToNintyNumbers[10] = {
   "", "X", "XX", "XXX", "XL", "L",
   "LX", "LXX", "LXXX", "XC"
-  },
+},
 romanOneToNineHundertNumbers[10] = {
   "", "C", "CC", "CCC", "CD", "D",
   "DC", "DCC", "DCCC", "CM"
-  };
+};
 
 int arabicEquivalentToRomanNumeral(string number) {
   int readyReturn;
@@ -32,22 +32,21 @@ int arabicEquivalentToRomanNumeral(string number) {
       if (number == romanOneToTenNumbers[i]) {
         readyReturn = i;
         return readyReturn;
-        }
+      }
       if (number == romanTenToNintyNumbers[i]) {
         readyReturn = i*10;
         return readyReturn;
-        }
+      }
       if (number == romanOneToNineHundertNumbers[i]) {
         readyReturn = i*100;
         return readyReturn;
-        }
       }
     }
-  else {
+  } else {
     return 1000;
-    }
-  return 0;
   }
+  return 0;
+}
 
 int main() {
   bool choice;
@@ -70,28 +69,24 @@ int main() {
       currentNumeral = iteratedNumber % 10;
       if (iteration == 1) {
         arabicToRomanResult = romanOneToTenNumbers[currentNumeral] + arabicToRomanResult;
-        }
-      else if (iteration == 2) {
+      } else if (iteration == 2) {
         arabicToRomanResult = romanTenToNintyNumbers[currentNumeral] + arabicToRomanResult;
-        }
-      else if (iteration == 3) {
+      } else if (iteration == 3) {
         arabicToRomanResult = romanOneToNineHundertNumbers[currentNumeral] + arabicToRomanResult;
-        }
-      else {
+      } else {
         while (iteratedNumber) {
           arabicToRomanResult = "M" + arabicToRomanResult;
           --iteratedNumber;
-          }
-        break;
         }
+        break;
+      }
       iteratedNumber /= 10;
       iteration++;
-      }
+    }
     cout << arabicToRomanResult;
 
 
-    }
-  else {
+  } else {
     string romanNumber;
 
     cout << "Enter a Roman number: ";
@@ -112,14 +107,13 @@ int main() {
       currentNumber = romanNumber[iteration];
       if(arabicEquivalentToRomanNumeral(currentNumber) > arabicEquivalentToRomanNumeral(previousNumber)) {
         romanToArabicResult = romanToArabicResult + arabicEquivalentToRomanNumeral(currentNumber) - arabicEquivalentToRomanNumeral(previousNumber) * 2;
-        }
-      else {
+      } else {
         romanToArabicResult += arabicEquivalentToRomanNumeral(currentNumber);
-        }
+      }
       ++iteration;
       cout << previousNumber << endl << currentNumber << endl;
-      }
-    cout << romanToArabicResult;
     }
-  return 0;
+    cout << romanToArabicResult;
   }
+  return 0;
+}
