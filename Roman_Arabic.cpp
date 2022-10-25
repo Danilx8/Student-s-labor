@@ -1,8 +1,11 @@
-/***************************************************
-*    Луговских Данил                               *
-*    ПИ-221                                        *
-*    Перевод арабских чисел в римские и обратно    *
-***************************************************/
+/********************************
+*                               *
+*        Lugovskih Danil        *
+*            PI-221             *
+*         Roman numbers         *
+*                               *
+********************************/
+
 #include <string>
 #include <iostream>
 #include <algorithm>
@@ -55,7 +58,7 @@ int main() {
   cin >> choice;
 
 
-  if(choice) {
+  if (choice) {
     int arabicNumber;
     cout << "Enter an Arabic number: ";
     cin >> arabicNumber;
@@ -85,7 +88,6 @@ int main() {
     }
     cout << arabicToRomanResult;
 
-
   } else {
     string romanNumber;
 
@@ -102,7 +104,7 @@ int main() {
 
     string previousNumber;
 
-    while(iteration < romanNumber.size()) {
+    while (iteration < romanNumber.size()) {
       previousNumber = currentNumber;
       currentNumber = romanNumber[iteration];
       if(arabicEquivalentToRomanNumeral(currentNumber) > arabicEquivalentToRomanNumeral(previousNumber)) {
