@@ -18,11 +18,11 @@ int main() {
   singlesFile.open("Cleopatra.txt");
   if (!singlesFile) {
     cout << "File not found.";
-    return 1;
+    return 0;
   }
 
-  for (int iterator = 0; iterator < 128; ++iterator) {
-    singleLetterFrequency[iterator] = 0;
+  for (int singleLetterIndex = 0; singleLetterIndex < 128; ++singleLetterIndex) {
+    singleLetterFrequency[singleLetterIndex] = 0;
   }
 
   character = singlesFile.get();
@@ -38,8 +38,6 @@ int main() {
       cout << character << " : " << singleLetterFrequency[character] << endl;
     }
   }
-
-  /////////////////////
 
 
   int doubleLetterFrequency[128][128];
