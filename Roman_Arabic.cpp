@@ -96,11 +96,12 @@ int main() {
               arabicToRomanResult = "M" + arabicToRomanResult;
               --arabicNumber;
             }
-          }
+        }
           
         arabicNumber /= 10;
         ++digitIndex;
-        }
+      }
+      
       cout << arabicToRomanResult;
       break;
       
@@ -124,7 +125,7 @@ int main() {
           romanToArabicResult += arabicEquivalentToRomanNumeral(currentCharacter);
         }
         ++characterIndex;
-        }
+      }
       cout << romanToArabicResult;
        break;
       
