@@ -1,14 +1,15 @@
 /****************************
 *                           *
-*	     Луговских Данил      *
-*	         ПИ-221           *
-*	        Календарь         *
+*	     Lugovskih Danil      *
+*	         PI-221           *
+*	        Calendar          *
 *                           *
 ****************************/
 
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <stdio.h>
 
 std::string weekdays[7] = {
   "MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"
@@ -26,8 +27,6 @@ int daysInMonths[12] = {
 struct monthLine {
   std::string months;
   std::string weekLine;
-  std::stringstream days;
-  int amountOfWeeks;
 };
 
 bool isLeapYear(int year) {
@@ -91,13 +90,13 @@ int main() {
     
     std::ostringstream dayIndexAsString;
     for (int dayIndex = 1; dayIndex < daysInMonths[monthIndex-1] + 1; ++dayIndex) {
-      dayIndexAsString << dayIndex;
-      dayIndexAsString.str();
+      //dayIndexAsString << dayIndex;
+      //dayIndexAsString.str();
       if (dayIndex < 10) { 
-        blocks[blockIndex].days << dayIndexAsString;
+        blocks[blockIndex].days << dayIndex;
         blocks[blockIndex].days << "      ";
       } else {
-        blocks[blockIndex].days << dayIndexAsString;
+        blocks[blockIndex].days << dayIndex;
         blocks[blockIndex].days << "    ";
       }
       ++numberInWeek;
@@ -109,9 +108,9 @@ int main() {
       }
       
       if (monthIndex == 2 && isLeapYear(year) && dayIndex == 28) {
-        dayIndexAsString << ++dayIndex;
-        dayIndexAsString.str();
-        blocks[blockIndex].days << dayIndexAsString;
+        //dayIndexAsString << ++dayIndex;
+        //dayIndexAsString.str();
+        blocks[blockIndex].days << dayIndex;
       }
     }
   
@@ -127,8 +126,8 @@ int main() {
   for (int blockIndex = 0; blockIndex < 4; ++blockIndex) {
     std::cout << blocks[blockIndex].months << std::endl <<
     blocks[blockIndex].weekLine << std::endl;
-    std::cout << blocks[blockIndex].days << std::endl;
-    
+    blocks[blockIndex].days.str();
+    std::cout << '\n';
   }
   
   return 0;
