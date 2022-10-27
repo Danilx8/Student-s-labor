@@ -15,11 +15,6 @@ std::string weekdays[7] = {
   "MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"
 };
 
-std:: string monthsNames[12] = {
-  "January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"
-};
-
 int daysInMonths[12] = {
   31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
 };
@@ -27,6 +22,8 @@ int daysInMonths[12] = {
 struct monthLine {
   std::string months;
   std::string weekLine;
+  std::string days[10] = {"", "", "", "", "", "", "", "", "", ""}; 
+  int amountOfWeeks = 0;
 };
 
 bool isLeapYear(int year) {
@@ -63,10 +60,19 @@ int main() {
   int year;
   std::cin >> year;
   
-  monthLine blocks[4];
+  monthLine blocks[4]; 
   
-  for (int blockIndex = 0; blockIndex < 4; ++blockIndex) {
-    for (int weekColumns = 0; weekColumns < 3; ++weekColumns) {
+  blocks[0].months += "January" + std::string(40, ' ') + 
+                   "February" + std::string(39, ' ') + "March";
+  blocks[1].months += "April" + std::string(42, ' ') + 
+                   "May" + std::string(44, ' ') + "June";
+  blocks[2].months += "July" + std::string(43, ' ') + 
+                   "August" + std::string(41, ' ') + "September";
+  blocks[3].months += "October" + std::string(40, ' ') + 
+                  "November" + std::string(39, ' ') + "December";
+  
+  for (int blockIndex = 0; blockIndex < 4; ++blockIndex) { 
+    for (int weekColumns = 0; weekColumns < 3; ++weekColumns) { 
       for (int weekdayIndex = 0; weekdayIndex < 7; ++weekdayIndex) {
       blocks[blockIndex].weekLine += weekdays[weekdayIndex] + std::string(3, ' ');
       }
@@ -75,59 +81,62 @@ int main() {
   }
   
   int blockIndex = 0;
-  int daysLineIndex = 0;
+  int weekIndex;
   
-  for (int monthIndex = 1; monthIndex < 13; ++monthIndex) {
-    blocks[blockIndex].months += monthsNames[monthIndex-1] + std::string(42, ' ');
-
+  for (int monthIndex = 1; monthIndex < 13; ++monthIndex) {  
+    weekIndex = 0;
+      
     int numberInWeek = 0;
-    int spacesBeforeFirstDayMultiplier = firstDayOfMonth(year, monthIndex);
+    int spacesBeforeFirstDayMultiplier = firstDayOfMonth(year, monthIndex); 
     while (spacesBeforeFirstDayMultiplier) {
-      blocks[blockIndex].days << std::string(6, ' ');
+      blocks[blockIndex].days[weekIndex] += std::string(6, ' ');
       --spacesBeforeFirstDayMultiplier;
       ++numberInWeek;
     }
     
-    std::ostringstream dayIndexAsString;
     for (int dayIndex = 1; dayIndex < daysInMonths[monthIndex-1] + 1; ++dayIndex) {
-      //dayIndexAsString << dayIndex;
-      //dayIndexAsString.str();
       if (dayIndex < 10) { 
-        blocks[blockIndex].days << dayIndex;
-        blocks[blockIndex].days << "      ";
+        blocks[blockIndex].days[weekIndex] += std::to_string(dayIndex);
+        blocks[blockIndex].days[weekIndex] += std::string(5, ' ');
       } else {
-        blocks[blockIndex].days << dayIndex;
-        blocks[blockIndex].days << "    ";
+        blocks[blockIndex].days[weekIndex] += std::to_string(dayIndex);
+        blocks[blockIndex].days[weekIndex] += std::string(4, ' ');
       }
       ++numberInWeek;
       
-      if (numberInWeek == 7) {
-        blocks[blockIndex].days << "     ";
-        blocks[blockIndex].days << '\n';
+      if (numberInWeek == 7) { 
+        blocks[blockIndex].days[weekIndex] += std::string(5, ' ');
         numberInWeek = 0;
+        ++weekIndex;
       }
-      
-      if (monthIndex == 2 && isLeapYear(year) && dayIndex == 28) {
-        //dayIndexAsString << ++dayIndex;
-        //dayIndexAsString.str();
-        blocks[blockIndex].days << dayIndex;
+        
+      int spacesAfterLastDay;  
+      if (monthIndex == 2 && isLeapYear(year) && dayIndex == 28) { 
+        blocks[blockIndex].days[weekIndex] += std::to_string(dayIndex);
+        spacesAfterLastDay = (7 - numberInWeek + 1) * 6 + 1 + 4;
+        blocks[blockIndex].days[weekIndex] += std::string(spacesAfterLastDay, ' ');
+      } else if (dayIndex + 1 > daysInMonths[monthIndex - 1]) {
+        spacesAfterLastDay = (7 - numberInWeek) * 6 + 1 + 4;
+        blocks[blockIndex].days[weekIndex] += std::string(spacesAfterLastDay, ' ');
       }
     }
   
+    if (weekIndex > blocks[blockIndex].amountOfWeeks) {
+      blocks[blockIndex].amountOfWeeks = weekIndex; 
+    }
+    
     if (monthIndex % 3 == 0) {
       ++blockIndex;
     }
     
-    blocks[blockIndex].amountOfWeeks = daysLineIndex;
-    daysLineIndex = 0;
   }
-  
-  
+
   for (int blockIndex = 0; blockIndex < 4; ++blockIndex) {
-    std::cout << blocks[blockIndex].months << std::endl <<
+    std::cout << std::endl << std::endl << blocks[blockIndex].months << std::endl <<
     blocks[blockIndex].weekLine << std::endl;
-    blocks[blockIndex].days.str();
-    std::cout << '\n';
+    for (int line = 0; line < blocks[blockIndex].amountOfWeeks; ++line) {
+      std::cout << blocks[blockIndex].days[line] << std::endl;
+    }
   }
   
   return 0;
