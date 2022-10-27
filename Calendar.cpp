@@ -1,8 +1,8 @@
 /****************************
 *                           *
-*	     Lugovskih Danil      *
-*	         PI-221           *
-*	        Calendar          *
+*      Lugovskih Danil      *
+*          PI-221           *
+*         Calendar          *
 *                           *
 ****************************/
 
