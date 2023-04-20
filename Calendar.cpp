@@ -58,6 +58,7 @@ int firstDayOfMonth(int year, int month) {
 
 int main() {
   int year;
+  std::cout << "Enter the year: ";
   std::cin >> year;
 
   monthLine blocks[4];
@@ -137,6 +138,6 @@ int main() {
       std::cout << blocks[blockIndex].days[line] << std::endl;
     }
   }
-
+  system("pause");
   return 0;
 }
